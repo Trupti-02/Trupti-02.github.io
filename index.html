@@ -3,582 +3,920 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trupti | Data Analyst Portfolio</title>
+  <title>Trupti Gangji | Data Analyst</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --ink: #0c0b10;
+      --ink-2: #4a4759;
+      --ink-3: #9896a4;
+      --bg: #f6f5fa;
+      --surface: #ffffff;
+      --border: rgba(12,11,16,0.08);
+      --border-strong: rgba(12,11,16,0.15);
+      --accent: #5b3cf5;
+      --accent-d: #4028d4;
+      --accent-soft: #ede9fe;
+      --accent-text: #3b1fc8;
+      --teal: #0d9f7a;
+      --teal-soft: #d0faf0;
+      --amber: #c9791a;
+      --amber-soft: #fef3d0;
+      --coral: #e05240;
+      --coral-soft: #fdecea;
+      --green: #2d8f5e;
+      --green-soft: #d6f5e7;
+      --r: 10px;
+      --r-lg: 16px;
+      --r-xl: 22px;
     }
 
+    html { scroll-behavior: smooth; }
     body {
-      font-family: 'Arial', sans-serif;
-      background: #f5f7fa;
-      color: #2d3748;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
     }
 
-    /* Sidebar Navigation */
-    .sidebar {
-      position: fixed;
-      left: 0;
-      top: 0;
-      width: 280px;
-      height: 100vh;
-      background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
-      padding: 2rem 1.5rem;
-      color: white;
+    /* ─── Layout ─── */
+    .wrap { display: grid; grid-template-columns: 240px 1fr; min-height: 100vh; }
+
+    /* ─── Sidebar ─── */
+    aside {
+      position: fixed; top: 0; left: 0;
+      width: 240px; height: 100vh;
+      background: var(--ink);
+      display: flex; flex-direction: column;
+      padding: 2rem 1.25rem;
       overflow-y: auto;
-      z-index: 100;
+      z-index: 50;
     }
 
-    .profile-section {
-      text-align: center;
-      margin-bottom: 2rem;
-      padding-bottom: 2rem;
-      border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    .av {
+      width: 60px; height: 60px; border-radius: 50%;
+      background: linear-gradient(135deg, #5b3cf5, #9d6ef8);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Syne', sans-serif; font-size: 1.5rem; color: #fff;
+      margin-bottom: 0.85rem; flex-shrink: 0;
     }
 
-    .profile-icon {
-      width: 120px;
-      height: 120px;
-      background: white;
-      border-radius: 50%;
-      margin: 0 auto 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 3rem;
-      color: #667eea;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    .s-name { font-size: 1rem; font-weight: 600; color: #fff; line-height: 1.2; }
+    .s-role { font-size: 0.73rem; color: rgba(255,255,255,0.42); margin-top: 3px; }
+    .s-loc  { font-size: 0.7rem; color: rgba(255,255,255,0.3); margin-top: 2px; }
+
+    hr.sd { border: none; border-top: 1px solid rgba(255,255,255,0.09); margin: 1.25rem 0; }
+
+    .s-label {
+      font-size: 0.62rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: rgba(255,255,255,0.28);
+      padding: 0 8px; margin-bottom: 6px;
     }
 
-    .profile-section h1 {
-      font-size: 1.75rem;
-      margin-bottom: 0.5rem;
-      font-weight: 700;
+    nav ul { list-style: none; }
+    nav li { margin-bottom: 1px; }
+    nav a {
+      color: rgba(255,255,255,0.55); text-decoration: none;
+      font-size: 0.82rem; font-weight: 500;
+      display: flex; align-items: center; gap: 9px;
+      padding: 7px 8px; border-radius: 8px;
+      transition: all 0.15s;
     }
+    nav a:hover, nav a.active { background: rgba(255,255,255,0.08); color: #fff; }
+    nav a .ic { font-size: 0.9rem; opacity: 0.6; }
+    nav a:hover .ic, nav a.active .ic { opacity: 1; }
 
-    .profile-section p {
-      font-size: 0.95rem;
-      opacity: 0.9;
-    }
-
-    .nav-menu {
-      list-style: none;
-    }
-
-    .nav-menu li {
-      margin-bottom: 0.75rem;
-    }
-
-    .nav-menu a {
-      color: white;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      padding: 0.75rem 1rem;
-      border-radius: 8px;
-      transition: all 0.3s ease;
-      font-weight: 500;
-    }
-
-    .nav-menu a:hover {
-      background: rgba(255, 255, 255, 0.15);
-      transform: translateX(5px);
-    }
-
-    .nav-icon {
-      font-size: 1.25rem;
-    }
-
-    /* Main Content */
-    .main-content {
-      margin-left: 280px;
-      padding: 2rem 3rem;
-      min-height: 100vh;
-    }
-
-    .section {
-      margin-bottom: 3rem;
-      scroll-margin-top: 2rem;
-    }
-
-    .section-header {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 1.5rem;
-      padding-bottom: 0.75rem;
-      border-bottom: 3px solid #667eea;
-    }
-
-    .section-header h2 {
-      font-size: 2rem;
-      color: #1a202c;
-      font-weight: 700;
-    }
-
-    .section-icon {
-      font-size: 2rem;
-      color: #667eea;
-    }
-
-    /* Resume Card */
-    .resume-card {
-      background: white;
-      border-radius: 16px;
-      padding: 2rem;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-    }
-
-    .resume-info {
-      flex: 1;
-    }
-
-    .resume-info h3 {
-      font-size: 1.5rem;
-      color: #2d3748;
-      margin-bottom: 0.5rem;
-    }
-
-    .resume-info p {
-      color: #718096;
-    }
-
-    .resume-btn {
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      color: white;
-      padding: 1rem 2rem;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.75rem;
-      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
-      transition: all 0.3s ease;
-    }
-
-    .resume-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.5);
-    }
-
-    /* Overview Card */
-    .overview-card {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      border-radius: 16px;
-      padding: 2.5rem;
-      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
-      line-height: 1.8;
-      font-size: 1.1rem;
-    }
-
-    .overview-card strong {
-      font-weight: 700;
-      font-size: 1.2rem;
-    }
-
-    /* Skills Grid */
-    .skills-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .skill-box {
-      background: white;
-      border-radius: 12px;
-      padding: 1.75rem;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-      transition: all 0.3s ease;
-      border-left: 4px solid #667eea;
-    }
-
-    .skill-box:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-    }
-
-    .skill-title {
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: #667eea;
-      margin-bottom: 0.75rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .skill-content {
-      color: #4a5568;
+    .s-foot {
+      margin-top: auto; padding-top: 1rem;
+      font-size: 0.68rem; color: rgba(255,255,255,0.22);
       line-height: 1.7;
     }
+    .s-foot a { color: rgba(255,255,255,0.38); text-decoration: none; }
+    .s-foot a:hover { color: rgba(255,255,255,0.65); }
 
-    /* Projects Grid */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-      gap: 2rem;
+    /* ─── Main ─── */
+    main { margin-left: 240px; padding: 3rem 3rem 6rem; }
+
+    section { margin-bottom: 5rem; scroll-margin-top: 2rem; }
+
+    .eyebrow {
+      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 0.4rem;
     }
 
-    .project-card {
-      background: white;
-      border-radius: 16px;
-      padding: 2rem;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
+    h2.sec {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.1rem; font-weight: 800;
+      color: var(--ink); line-height: 1.15;
+      margin-bottom: 0.5rem;
     }
 
-    .project-card::before {
+    .sec-sub {
+      font-size: 0.9rem; color: var(--ink-2);
+      margin-bottom: 2rem; max-width: 560px;
+    }
+
+    /* ─── Hero ─── */
+    .hero {
+      background: var(--ink);
+      border-radius: var(--r-xl);
+      padding: 3rem 3rem 2.5rem;
+      color: #fff; position: relative; overflow: hidden;
+    }
+    .hero::before {
       content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 4px;
-      background: linear-gradient(90deg, #667eea, #764ba2);
+      position: absolute; width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(91,60,245,0.22) 0%, transparent 65%);
+      top: -200px; right: -100px; pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(13,159,122,0.14) 0%, transparent 65%);
+      bottom: -100px; left: 50px; pointer-events: none;
     }
 
-    .project-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 12px 35px rgba(102, 126, 234, 0.2);
+    .hero-top { position: relative; z-index: 1; margin-bottom: 2rem; }
+    .hero-top .eyebrow { color: rgba(155,120,255,0.8); }
+
+    .hero-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.6rem; font-weight: 800;
+      color: #fff; line-height: 1.1; margin-bottom: 1rem;
+    }
+    .hero-title span { color: #9b78ff; }
+
+    .hero-desc {
+      font-size: 1rem; line-height: 1.75;
+      color: rgba(255,255,255,0.7); max-width: 620px;
+    }
+    .hero-desc strong { color: #fff; font-weight: 600; }
+
+    .hero-actions { display: flex; gap: 12px; margin-top: 1.75rem; flex-wrap: wrap; }
+
+    .btn-pri {
+      background: #5b3cf5; color: #fff;
+      text-decoration: none; padding: 10px 22px;
+      border-radius: 50px; font-size: 0.82rem; font-weight: 600;
+      display: inline-flex; align-items: center; gap: 7px;
+      transition: background 0.15s, transform 0.15s;
+    }
+    .btn-pri:hover { background: #4028d4; transform: translateY(-2px); }
+
+    .btn-ghost {
+      background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.75);
+      text-decoration: none; padding: 10px 20px;
+      border-radius: 50px; font-size: 0.82rem; font-weight: 500;
+      border: 1px solid rgba(255,255,255,0.12);
+      display: inline-flex; align-items: center; gap: 7px;
+      transition: all 0.15s;
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,0.12); color: #fff; }
+
+    /* ─── Stat strip ─── */
+    .stats {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 1px; background: rgba(255,255,255,0.07);
+      border-top: 1px solid rgba(255,255,255,0.07);
+      position: relative; z-index: 1;
+    }
+    .stat {
+      padding: 1.25rem 1.5rem;
+      background: rgba(255,255,255,0.03);
+    }
+    .stat:first-child { border-radius: 0 0 0 var(--r-xl); }
+    .stat:last-child  { border-radius: 0 0 var(--r-xl) 0; }
+
+    .stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 2rem; font-weight: 800; color: #fff; line-height: 1;
+    }
+    .stat-num sup { font-size: 1rem; color: #9b78ff; vertical-align: top; margin-top: 4px; }
+    .stat-lbl { font-size: 0.72rem; color: rgba(255,255,255,0.4); margin-top: 4px; }
+
+    /* ─── Project cards ─── */
+    .projects { display: flex; flex-direction: column; gap: 2rem; }
+
+    .proj {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .proj:hover {
+      border-color: var(--accent);
+      box-shadow: 0 8px 40px rgba(91,60,245,0.1);
     }
 
-    .project-title {
-      font-size: 1.35rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-    }
-
-    .project-title a {
-      color: #667eea;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      transition: color 0.3s ease;
-    }
-
-    .project-title a:hover {
-      color: #764ba2;
-    }
-
-    .project-description {
-      color: #4a5568;
-      line-height: 1.7;
-    }
-
-    .project-link-icon {
-      font-size: 1.25rem;
-    }
-
-    /* Contact Section */
-    .contact-cards {
+    .proj-inner {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
+      grid-template-columns: 1fr 320px;
     }
 
-    .contact-card {
-      background: white;
-      border-radius: 16px;
-      padding: 2rem;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-      text-align: center;
-      transition: all 0.3s ease;
+    .proj-body { padding: 2.25rem 2.5rem; }
+
+    .proj-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.68rem; font-weight: 700;
+      color: var(--ink-3); letter-spacing: 0.1em;
+      margin-bottom: 0.75rem;
     }
 
-    .contact-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 30px rgba(102, 126, 234, 0.2);
+    .proj-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.45rem; font-weight: 800;
+      color: var(--ink); line-height: 1.2;
+      margin-bottom: 0.75rem;
     }
 
-    .contact-icon {
-      width: 70px;
-      height: 70px;
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      color: white;
-      margin: 0 auto 1rem;
+    .proj-desc {
+      font-size: 0.875rem; color: var(--ink-2);
+      line-height: 1.7; margin-bottom: 1.5rem;
+      max-width: 480px;
     }
 
-    .contact-label {
-      font-size: 0.9rem;
-      color: #718096;
-      margin-bottom: 0.5rem;
+    .proj-metrics {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 10px; margin-bottom: 1.75rem;
     }
 
-    .contact-card a {
-      color: #667eea;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1.05rem;
-      transition: color 0.3s ease;
+    .pm {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 0.85rem 1rem;
+    }
+    .pm-val {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.35rem; font-weight: 800;
+      color: var(--ink); line-height: 1;
+    }
+    .pm-val.accent { color: var(--accent); }
+    .pm-val.teal   { color: var(--teal); }
+    .pm-val.amber  { color: var(--amber); }
+    .pm-val.coral  { color: var(--coral); }
+    .pm-val.green  { color: var(--green); }
+    .pm-lbl {
+      font-size: 0.68rem; color: var(--ink-3);
+      margin-top: 3px; line-height: 1.3;
     }
 
-    .contact-card a:hover {
-      color: #764ba2;
+    .proj-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1.75rem; }
+    .tag {
+      background: var(--accent-soft); color: var(--accent-text);
+      border-radius: 6px; padding: 3px 10px;
+      font-size: 0.72rem; font-weight: 500;
+    }
+    .tag.teal  { background: var(--teal-soft);   color: #065541; }
+    .tag.amber { background: var(--amber-soft);  color: #7a4a08; }
+    .tag.coral { background: var(--coral-soft);  color: #8f2416; }
+    .tag.green { background: var(--green-soft);  color: #1a5c3c; }
+
+    .proj-links { display: flex; gap: 10px; align-items: center; }
+    .proj-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      text-decoration: none; font-size: 0.8rem; font-weight: 600;
+      padding: 8px 18px; border-radius: 50px;
+      transition: all 0.15s;
+    }
+    .proj-link.gh {
+      background: var(--ink); color: #fff;
+    }
+    .proj-link.gh:hover { background: #2a2838; }
+    .proj-link.live {
+      background: var(--accent-soft); color: var(--accent-text);
+      border: 1px solid rgba(91,60,245,0.2);
+    }
+    .proj-link.live:hover { background: #ddd5fd; }
+
+    /* ─── Project right panel ─── */
+    .proj-panel {
+      border-left: 1px solid var(--border);
+      padding: 2rem 1.75rem;
+      background: var(--bg);
+      display: flex; flex-direction: column; gap: 1.5rem;
     }
 
-    /* Footer */
-    .footer {
-      margin-top: 4rem;
-      padding: 2rem 0;
-      text-align: center;
-      color: #718096;
-      border-top: 2px solid #e2e8f0;
+    .panel-title {
+      font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--ink-3); margin-bottom: 8px;
     }
 
-    /* Responsive */
-    @media (max-width: 968px) {
-      .sidebar {
-        width: 100%;
-        height: auto;
-        position: relative;
-      }
-
-      .main-content {
-        margin-left: 0;
-        padding: 2rem 1.5rem;
-      }
-
-      .nav-menu {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 0.5rem;
-      }
-
-      .projects-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .section-header h2 {
-        font-size: 1.5rem;
-      }
+    .feature-list { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+    .feature-list li {
+      font-size: 0.8rem; color: var(--ink-2);
+      line-height: 1.5; padding-left: 14px;
+      position: relative;
+    }
+    .feature-list li::before {
+      content: '→'; position: absolute; left: 0;
+      color: var(--accent); font-size: 0.7rem;
     }
 
-    /* Smooth Scroll */
-    html {
-      scroll-behavior: smooth;
+    .arch-layers { display: flex; flex-direction: column; gap: 6px; }
+    .arch-layer {
+      display: flex; align-items: center; gap: 10px;
+      padding: 8px 12px;
+      border-radius: 8px; font-size: 0.78rem; font-weight: 500;
+    }
+    .arch-layer .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .arch-layer.bronze { background: #fff8f0; color: #8b5e2a; }
+    .arch-layer.bronze .dot { background: #cd7f32; }
+    .arch-layer.silver { background: #f5f5f7; color: #5a5a6a; }
+    .arch-layer.silver .dot { background: #a0a0b0; }
+    .arch-layer.gold   { background: #fffbec; color: #7a6010; }
+    .arch-layer.gold   .dot { background: #c9a82a; }
+    .arch-layer-desc { font-size: 0.68rem; color: var(--ink-3); margin-top: 1px; }
+
+    .model-table { width: 100%; border-collapse: collapse; }
+    .model-table td {
+      font-size: 0.75rem; padding: 5px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .model-table tr:last-child td { border: none; }
+    .model-table .mn { color: var(--ink-2); font-weight: 500; }
+    .model-table .ms { color: var(--ink-3); }
+    .model-table .mb { color: var(--accent); font-weight: 600; }
+
+    .bar-row { margin-bottom: 10px; }
+    .bar-label {
+      display: flex; justify-content: space-between;
+      font-size: 0.72rem; color: var(--ink-2); margin-bottom: 4px;
+    }
+    .bar-track {
+      height: 6px; background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px; overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%; border-radius: 4px;
+      background: var(--accent);
+      transition: width 1s ease;
+    }
+    .bar-fill.teal  { background: var(--teal); }
+    .bar-fill.amber { background: var(--amber); }
+    .bar-fill.coral { background: var(--coral); }
+
+    /* ─── Skills section ─── */
+    .skills-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .sk {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 1.25rem 1.4rem;
+      transition: border-color 0.15s, transform 0.15s;
+    }
+    .sk:hover { border-color: var(--border-strong); transform: translateY(-3px); }
+    .sk-cat {
+      font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 6px;
+    }
+    .sk h3 { font-size: 0.9rem; font-weight: 600; color: var(--ink); margin-bottom: 10px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 5px; }
+    .stag {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 5px; padding: 2px 8px;
+      font-size: 0.72rem; color: var(--ink-2);
+    }
+
+    /* ─── Contact ─── */
+    .contact-row {
+      display: flex; gap: 14px; flex-wrap: wrap;
+    }
+    .cc {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--r-lg); padding: 1.5rem 1.75rem;
+      display: flex; align-items: center; gap: 1rem;
+      transition: border-color 0.15s, transform 0.15s;
+      text-decoration: none; flex: 1; min-width: 220px;
+    }
+    .cc:hover { border-color: var(--accent); transform: translateY(-3px); }
+    .cc-icon {
+      width: 42px; height: 42px; border-radius: 10px;
+      background: var(--accent-soft);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; flex-shrink: 0;
+    }
+    .cc-label { font-size: 0.68rem; color: var(--ink-3); margin-bottom: 2px; }
+    .cc-val { font-size: 0.85rem; font-weight: 600; color: var(--accent); }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding-top: 1.5rem;
+      font-size: 0.73rem; color: var(--ink-3);
+    }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 1050px) {
+      .proj-inner { grid-template-columns: 1fr; }
+      .proj-panel { border-left: none; border-top: 1px solid var(--border); }
+    }
+    @media (max-width: 860px) {
+      .wrap { display: block; }
+      aside { position: relative; width: 100%; height: auto; flex-direction: row; flex-wrap: wrap; gap: 1rem; padding: 1.25rem; }
+      main { margin-left: 0; padding: 2rem 1.25rem 4rem; }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .skills-grid { grid-template-columns: 1fr 1fr; }
+      .proj-metrics { grid-template-columns: repeat(2, 1fr); }
+      h2.sec { font-size: 1.6rem; }
+      .hero-title { font-size: 1.9rem; }
+    }
+    @media (max-width: 560px) {
+      .skills-grid { grid-template-columns: 1fr; }
+      .proj-metrics { grid-template-columns: 1fr 1fr; }
+      .stats { grid-template-columns: 1fr 1fr; }
     }
   </style>
 </head>
 <body>
+<div class="wrap">
 
-  <!-- Sidebar -->
-  <aside class="sidebar">
-    <div class="profile-section">
-      <div class="profile-icon">👩‍💻</div>
-      <h1>Trupti</h1>
-      <p>Data Analyst</p>
-    </div>
+<!-- ═══ Sidebar ═══ -->
+<aside>
+  <div class="av">T</div>
+  <div class="s-name">Trupti Gangji</div>
+  <div class="s-role">Data Analyst</div>
+  <div class="s-loc">Baltimore, MD</div>
 
-    <nav>
-      <ul class="nav-menu">
-        <li><a href="#resume"><span class="nav-icon">📄</span> Resume</a></li>
-        <li><a href="#overview"><span class="nav-icon">💡</span> Overview</a></li>
-        <li><a href="#skills"><span class="nav-icon">🛠️</span> Skills</a></li>
-        <li><a href="#projects"><span class="nav-icon">📂</span> Projects</a></li>
-        <li><a href="#contact"><span class="nav-icon">📬</span> Contact</a></li>
-      </ul>
-    </nav>
-  </aside>
+  <hr class="sd">
+  <p class="s-label">Navigate</p>
+  <nav>
+    <ul>
+      <li><a href="#about"><span class="ic">◈</span> Overview</a></li>
+      <li><a href="#projects"><span class="ic">◩</span> Projects</a></li>
+      <li><a href="#skills"><span class="ic">◎</span> Skills</a></li>
+      <li><a href="#contact"><span class="ic">◉</span> Contact</a></li>
+    </ul>
+  </nav>
 
-  <!-- Main Content -->
-  <main class="main-content">
-    
-    <!-- Resume Section -->
-    <section id="resume" class="section">
-      <div class="section-header">
-        <span class="section-icon">📄</span>
-        <h2>Resume</h2>
-      </div>
-      <div class="resume-card">
-        <div class="resume-info">
-          <h3>Download My Resume</h3>
-          <p>View or download my complete professional resume in PDF format</p>
-        </div>
-        <a href="Resume.pdf" class="resume-btn" target="_blank">
-          <span>View Resume</span>
-          <span>📥</span>
-        </a>
-      </div>
-    </section>
+  <hr class="sd">
+  <p class="s-label">Links</p>
+  <nav>
+    <ul>
+      <li><a href="Resume.pdf" target="_blank"><span class="ic">↓</span> Resume PDF</a></li>
+      <li><a href="https://github.com/Trupti-02" target="_blank"><span class="ic">⌥</span> GitHub</a></li>
+      <li><a href="https://www.linkedin.com/in/truptigangji" target="_blank"><span class="ic">⊞</span> LinkedIn</a></li>
+    </ul>
+  </nav>
 
-    <!-- Overview Section -->
-    <section id="overview" class="section">
-      <div class="section-header">
-        <span class="section-icon">💡</span>
-        <h2>Professional Overview</h2>
-      </div>
-      <div class="overview-card">
-        <p>
-          Hi, I'm <strong>Trupti</strong> — a Master's graduate in Information Systems and a detail-oriented Data Analyst passionate about
-          transforming raw data into impactful insights. I specialize in data storytelling through visualization, statistical analysis,
-          and building dashboards that enable confident decision-making.
+  <div class="s-foot">
+    <a href="mailto:truptigangji@gmail.com">truptigangji@gmail.com</a><br>
+    +1 (667) 369-5231
+  </div>
+</aside>
+
+<!-- ═══ Main ═══ -->
+<main>
+
+  <!-- Hero -->
+  <section id="about">
+    <div class="hero">
+      <div class="hero-top">
+        <p class="eyebrow">Data Analyst · MS Information Systems, UMBC</p>
+        <h1 class="hero-title">Turning data into<br><span>decisions that land.</span></h1>
+        <p class="hero-desc">
+          I build <strong>end-to-end data pipelines</strong>, <strong>predictive models</strong>, and <strong>BI dashboards</strong>
+          across healthcare, finance, and engineering. From raw CSVs to production-ready Delta Lake star schemas —
+          I close the gap between messy data and confident decisions.
         </p>
-      </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="section">
-      <div class="section-header">
-        <span class="section-icon">🛠️</span>
-        <h2>Skills</h2>
-      </div>
-      <div class="skills-container">
-        <div class="skill-box">
-          <div class="skill-title">
-            <span>💻</span>
-            <span>Languages</span>
-          </div>
-          <div class="skill-content">
-            Python, SQL, R, Java, C/C++, HTML, CSS, JavaScript, VHDL, VLSI
-          </div>
-        </div>
-
-        <div class="skill-box">
-          <div class="skill-title">
-            <span>🤖</span>
-            <span>Data Analysis & ML</span>
-          </div>
-          <div class="skill-content">
-            Pandas, NumPy, Scikit-learn, TensorFlow, PyTorch, Predictive Analytics, Statistical Modeling, Time Series Forecasting, A/B Testing, Data Annotation, Quality Assurance, Quality Auditing.
-          </div>
-        </div>
-
-        <div class="skill-box">
-          <div class="skill-title">
-            <span>📊</span>
-            <span>Data Visualization</span>
-          </div>
-          <div class="skill-content">
-            Tableau, Power BI, Matplotlib, Seaborn, MS Excel (Advanced Functions, Pivot Table, VBA), Streamlit, KPI Dashboards, Power Query, GIS.
-          </div>
-        </div>
-
-        <div class="skill-box">
-          <div class="skill-title">
-            <span>☁️</span>
-            <span>Big Data & Cloud</span>
-          </div>
-          <div class="skill-content">
-            MySQL, NoSQL, MongoDB, Snowflake, AWS, Azure, GCP, GitHub, Docker, Databricks, JIRA.
-          </div>
-        </div>
-
-        <div class="skill-box">
-          <div class="skill-title">
-            <span>🔧</span>
-            <span>Other Tools</span>
-          </div>
-          <div class="skill-content">
-            SCADA, CMMS, MQTT, Raspberry Pi, Adobe XD, Lens Studio.
-          </div>
+        <div class="hero-actions">
+          <a href="Resume.pdf" class="btn-pri" target="_blank">Download Resume ↓</a>
+          <a href="#projects" class="btn-ghost">View Projects →</a>
         </div>
       </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="section">
-      <div class="section-header">
-        <span class="section-icon">📂</span>
-        <h2>Projects</h2>
-      </div>
-      <div class="projects-grid">
-        
-        <div class="project-card">
-          <div class="project-title">
-            <a href="https://github.com/Trupti-02/End_to_End_Flights_Analytics_Pipeline-Databricks-" target="_blank">
-              <span>End_to_End_Flights_Analytics_Pipeline-Databricks</span>
-              <span class="project-link-icon">🔗</span>
-            </a>
-          </div>
-          <p class="project-description">
-            Designed and implemented an end-to-end Databricks data pipeline using Medallion Architecture with incremental loads and CDC. Delivered analytics-ready fact and dimension tables using Delta Lake, Auto Loader, and Delta Live Tables.
-          </p>
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-num">75K<sup>+</sup></div>
+          <div class="stat-lbl">Records processed across projects</div>
         </div>
-
-        <div class="project-card">
-          <div class="project-title">
-            <a href="https://github.com/Trupti-02/Customer_Accounts_Operations_Project" target="_blank">
-              <span>Customer Account Operations Project</span>
-              <span class="project-link-icon">🔗</span>
-            </a>
-          </div>
-          <p class="project-description">
-            Project integrates customer, billing, and payment data into a unified dataset for Power BI dashboards, automating key metrics like account aging and collection efficiency to support data-driven account management.
-          </p>
+        <div class="stat">
+          <div class="stat-num">6<sup>+</sup></div>
+          <div class="stat-lbl">ML models built &amp; benchmarked</div>
         </div>
-
-        <div class="project-card">
-          <div class="project-title">
-            <a href="https://github.com/Trupti-02/Sales_dashboard" target="_blank">
-              <span>Sales Dashboard with Forecasting</span>
-              <span class="project-link-icon">🔗</span>
-            </a>
-          </div>
-          <p class="project-description">
-            Streamlit app for KPI tracking and future sales prediction using Facebook Prophet.
-          </p>
+        <div class="stat">
+          <div class="stat-num">4</div>
+          <div class="stat-lbl">End-to-end deployed pipelines</div>
         </div>
-
-        <div class="project-card">
-          <div class="project-title">
-            <a href="https://github.com/Trupti-02/music" target="_blank">
-              <span>Spotify AI Recommender</span>
-              <span class="project-link-icon">🔗</span>
-            </a>
-          </div>
-          <p class="project-description">
-            Streamlit app for song recommendation using audio similarity, mood classification with ML models, and interactive EDA on Spotify tracks.
-          </p>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="section">
-      <div class="section-header">
-        <span class="section-icon">📬</span>
-        <h2>Contact</h2>
-      </div>
-      <div class="contact-cards">
-        <div class="contact-card">
-          <div class="contact-icon">✉️</div>
-          <div class="contact-label">Email</div>
-          <a href="mailto:truptigangji@gmail.com">truptigangji@gmail.com</a>
-        </div>
-
-        <div class="contact-card">
-          <div class="contact-icon">💼</div>
-          <div class="contact-label">LinkedIn</div>
-          <a href="https://www.linkedin.com/in/truptigangji" target="_blank">linkedin.com/in/truptigangji</a>
+        <div class="stat">
+          <div class="stat-num">3</div>
+          <div class="stat-lbl">Cloud platforms used (Azure, AWS, GCP)</div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <footer class="footer">
-      Last updated June 2025 • Built with 💙 using HTML & GitHub Pages
-    </footer>
+  <!-- Projects -->
+  <section id="projects">
+    <p class="eyebrow">What I've built</p>
+    <h2 class="sec">Projects</h2>
+    <p class="sec-sub">Four end-to-end data projects — each with real data, real pipelines, and measurable outcomes.</p>
 
-  </main>
+    <div class="projects">
+
+      <!-- ── PROJECT 1: Flights ── -->
+      <div class="proj">
+        <div class="proj-inner">
+          <div class="proj-body">
+            <p class="proj-num">PROJECT 01 · Data Engineering</p>
+            <h3 class="proj-title">End-to-End Flights Analytics Pipeline</h3>
+            <p class="proj-desc">
+              Production-ready Databricks pipeline implementing the Medallion Architecture (Bronze → Silver → Gold)
+              for flight booking analytics. Supports both initial and incremental loads via Auto Loader, with full
+              CDC and a star schema ready for BI consumption.
+            </p>
+
+            <div class="proj-metrics">
+              <div class="pm">
+                <div class="pm-val accent">1,300<span style="font-size:0.85rem">+</span></div>
+                <div class="pm-lbl">Total records processed (initial + incremental)</div>
+              </div>
+              <div class="pm">
+                <div class="pm-val teal">3</div>
+                <div class="pm-lbl">Medallion layers (Bronze / Silver / Gold)</div>
+              </div>
+              <div class="pm">
+                <div class="pm-val amber">4</div>
+                <div class="pm-lbl">Data sources unified (bookings, flights, airports, passengers)</div>
+              </div>
+              <div class="pm">
+                <div class="pm-val coral">SCD1</div>
+                <div class="pm-lbl">Change Data Capture at Silver layer (DLT)</div>
+              </div>
+              <div class="pm">
+                <div class="pm-val green">Star</div>
+                <div class="pm-lbl">Schema type — 1 fact + 3 dimension tables</div>
+              </div>
+              <div class="pm">
+                <div class="pm-val accent">100%</div>
+                <div class="pm-lbl">Idempotent pipeline — safe to re-run</div>
+              </div>
+            </div>
+
+            <div class="proj-tags">
+              <span class="tag">Databricks</span>
+              <span class="tag">Delta Lake</span>
+              <span class="tag teal">Delta Live Tables</span>
+              <span class="tag teal">Auto Loader</span>
+              <span class="tag amber">PySpark</span>
+              <span class="tag amber">Python</span>
+              <span class="tag coral">SQL</span>
+              <span class="tag">Medallion Architecture</span>
+              <span class="tag">CDC / SCD</span>
+            </div>
+
+            <div class="proj-links">
+              <a href="https://github.com/Trupti-02/End_to_End_Flights_Analytics_Pipeline-Databricks-" target="_blank" class="proj-link gh">
+                ⌥ View on GitHub
+              </a>
+            </div>
+          </div>
+
+          <div class="proj-panel">
+            <div>
+              <p class="panel-title">Medallion Architecture</p>
+              <div class="arch-layers">
+                <div>
+                  <div class="arch-layer bronze"><span class="dot"></span><div><div>Bronze Layer</div><div class="arch-layer-desc">Raw CSV → Delta via Auto Loader (streaming)</div></div></div>
+                </div>
+                <div style="text-align:center;font-size:0.7rem;color:var(--ink-3);padding:2px 0">↓</div>
+                <div>
+                  <div class="arch-layer silver"><span class="dot"></span><div><div>Silver Layer</div><div class="arch-layer-desc">DLT pipeline · CDC · SCD Type 1 · data quality rules</div></div></div>
+                </div>
+                <div style="text-align:center;font-size:0.7rem;color:var(--ink-3);padding:2px 0">↓</div>
+                <div>
+                  <div class="arch-layer gold"><span class="dot"></span><div><div>Gold Layer</div><div class="arch-layer-desc">Star schema · surrogate keys · MERGE upserts · audit cols</div></div></div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <p class="panel-title">Key features</p>
+              <ul class="feature-list">
+                <li>Checkpoint-based incremental streaming (Auto Loader)</li>
+                <li>Automatic schema inference &amp; evolution</li>
+                <li>Data quality gates drop invalid records at Silver</li>
+                <li>Surrogate key generation for all dimension tables</li>
+                <li>Full audit trail: create_date / update_date columns</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── PROJECT 2: AR / Customer Accounts ── -->
+      <div class="proj">
+        <div class="proj-inner">
+          <div class="proj-body">
+            <p class="proj-num">PROJECT 02 · Data Analysis · BI</p>
+            <h3 class="proj-title">AR Master Data Analysis Pipeline</h3>
+            <p class="proj-desc">
+              Python pipeline that consolidates accounts receivable data from 5 sources into a single analytical
+              dataset with automated aging, collection efficiency, and risk metrics — exported clean for Power BI.
+            </p>
+
+            <div class="proj-metrics">
+              <div class="pm">
+                <div class="pm-val accent">75K<span style="font-size:0.85rem">+</span></div>
+                <div class="pm-lbl">Total records across all 5 sources</div>
+              </div>
+              <div class="pm">
+                <div class="pm-val teal">5</div>
+                <div class="pm-lbl">Data sources unified (customers, invoices, payments, POs, interactions)</div>
+              </div>
+              <div class="pm">
+                <div class="pm-val amber">18</div>
+                <div class="pm-lbl">Output columns in final Power BI-ready dataset</div>
+              </div>
+              <div class="pm">
+                <div class="pm-val coral">5</div>
+                <div class="pm-lbl">Aging buckets (0-30, 31-60, 61-90, 91-120, 120+)</div>
+              </div>
+              <div class="pm">
+                <div class="pm-val green">20K</div>
+                <div class="pm-lbl">Invoices tracked across 10K customers</div>
+              </div>
+              <div class="pm">
+                <div class="pm-val accent">DSO</div>
+                <div class="pm-lbl">Days Sales Outstanding + collection cycle KPIs enabled</div>
+              </div>
+            </div>
+
+            <div class="proj-tags">
+              <span class="tag">Python</span>
+              <span class="tag">Pandas</span>
+              <span class="tag teal">Power BI</span>
+              <span class="tag teal">DAX</span>
+              <span class="tag amber">NumPy</span>
+              <span class="tag amber">Jupyter</span>
+              <span class="tag coral">Accounts Receivable</span>
+              <span class="tag">Aging Analysis</span>
+              <span class="tag">KPI Dashboards</span>
+            </div>
+
+            <div class="proj-links">
+              <a href="https://github.com/Trupti-02/Customer_Accounts_Operations_Project" target="_blank" class="proj-link gh">
+                ⌥ View on GitHub
+              </a>
+            </div>
+          </div>
+
+          <div class="proj-panel">
+            <div>
+              <p class="panel-title">Data sources integrated</p>
+              <ul class="feature-list">
+                <li><strong>Customers</strong> — 10,000 records · industry, location, account status</li>
+                <li><strong>Invoices</strong> — 20,000 records · amounts, dates, status</li>
+                <li><strong>Payments</strong> — 15,000 records · methods, amounts</li>
+                <li><strong>Purchase Orders</strong> — 12,000 records · approval status</li>
+                <li><strong>Interactions</strong> — 18,000 records · issue categories, comms log</li>
+              </ul>
+            </div>
+            <div>
+              <p class="panel-title">Metrics automated</p>
+              <ul class="feature-list">
+                <li>Outstanding balance per invoice (null-safe)</li>
+                <li>Days past due &amp; aging bucket assignment</li>
+                <li>Payment cycle time (invoice → payment date)</li>
+                <li>Customer risk segmentation by payment pattern</li>
+                <li>DSO trending &amp; collection efficiency tracking</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── PROJECT 3: Spotify ── -->
+      <div class="proj">
+        <div class="proj-inner">
+          <div class="proj-body">
+            <p class="proj-num">PROJECT 03 · ML · Deployed App</p>
+            <h3 class="proj-title">Spotify AI Recommender</h3>
+            <p class="proj-desc">
+              Interactive Streamlit app that analyzes Spotify track data, benchmarks 6 ML models for mood
+              classification, and recommends songs via content-based cosine similarity — deployed live on
+              Streamlit Cloud.
+            </p>
+
+            <div class="proj-metrics">
+              <div class="pm">
+                <div class="pm-val accent">6</div>
+                <div class="pm-lbl">ML models trained &amp; compared (KNN, RF, LR, SVM, XGBoost, Stacking)</div>
+              </div>
+              <div class="pm">
+                <div class="pm-val teal">Cosine</div>
+                <div class="pm-lbl">Similarity method for song-to-song matching</div>
+              </div>
+              <div class="pm">
+                <div class="pm-val amber">9</div>
+                <div class="pm-lbl">Audio features used (danceability, energy, valence, tempo…)</div>
+              </div>
+              <div class="pm">
+                <div class="pm-val coral">PCA</div>
+                <div class="pm-lbl">Dimensionality reduction for cluster visualization</div>
+              </div>
+              <div class="pm">
+                <div class="pm-val green">Live</div>
+                <div class="pm-lbl">Deployed on Streamlit Cloud</div>
+              </div>
+              <div class="pm">
+                <div class="pm-val accent">4</div>
+                <div class="pm-lbl">Dashboard tabs: EDA · Models · Recommender · Data export</div>
+              </div>
+            </div>
+
+            <div class="proj-tags">
+              <span class="tag">Python</span>
+              <span class="tag">Streamlit</span>
+              <span class="tag teal">Scikit-learn</span>
+              <span class="tag teal">XGBoost</span>
+              <span class="tag amber">Plotly</span>
+              <span class="tag amber">Pandas</span>
+              <span class="tag coral">Cosine Similarity</span>
+              <span class="tag">PCA</span>
+              <span class="tag">Spotify API</span>
+            </div>
+
+            <div class="proj-links">
+              <a href="https://github.com/Trupti-02/music" target="_blank" class="proj-link gh">⌥ View on GitHub</a>
+              <a href="https://musicrecommendation-untmnqgwl6lkwamzndobfz.streamlit.app/" target="_blank" class="proj-link live">↗ Live App</a>
+            </div>
+          </div>
+
+          <div class="proj-panel">
+            <div>
+              <p class="panel-title">Model benchmark</p>
+              <table class="model-table">
+                <tr><td class="mn">XGBoost</td><td class="mb">Best performer</td></tr>
+                <tr><td class="mn">Stacking Ensemble</td><td class="ms">2nd · highest AUC</td></tr>
+                <tr><td class="mn">Random Forest</td><td class="ms">Strong F1</td></tr>
+                <tr><td class="mn">SVM (RBF)</td><td class="ms">Solid baseline</td></tr>
+                <tr><td class="mn">Logistic Regression</td><td class="ms">Fast, interpretable</td></tr>
+                <tr><td class="mn">K-Nearest Neighbors</td><td class="ms">Reference model</td></tr>
+              </table>
+            </div>
+            <div>
+              <p class="panel-title">Audio features used</p>
+              <div class="bar-row"><div class="bar-label"><span>Valence (mood target)</span><span>100%</span></div><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div></div>
+              <div class="bar-row"><div class="bar-label"><span>Energy</span><span>90%</span></div><div class="bar-track"><div class="bar-fill teal" style="width:90%"></div></div></div>
+              <div class="bar-row"><div class="bar-label"><span>Danceability</span><span>85%</span></div><div class="bar-track"><div class="bar-fill amber" style="width:85%"></div></div></div>
+              <div class="bar-row"><div class="bar-label"><span>Tempo</span><span>75%</span></div><div class="bar-track"><div class="bar-fill coral" style="width:75%"></div></div></div>
+              <div class="bar-row"><div class="bar-label"><span>Acousticness</span><span>65%</span></div><div class="bar-track"><div class="bar-fill" style="width:65%"></div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── PROJECT 4: Sales Dashboard ── -->
+      <div class="proj">
+        <div class="proj-inner">
+          <div class="proj-body">
+            <p class="proj-num">PROJECT 04 · Forecasting · Deployed App</p>
+            <h3 class="proj-title">Sales Dashboard with Forecasting</h3>
+            <p class="proj-desc">
+              Dynamic Streamlit dashboard for sales KPI tracking and future revenue forecasting using Facebook
+              Prophet. Features interactive filters, multi-tab analysis views, and 1–12 month product-line
+              forecasts with confidence bands.
+            </p>
+
+            <div class="proj-metrics">
+              <div class="pm">
+                <div class="pm-val accent">12</div>
+                <div class="pm-lbl">Month forecast horizon per product line</div>
+              </div>
+              <div class="pm">
+                <div class="pm-val teal">Prophet</div>
+                <div class="pm-lbl">Facebook time-series forecasting model</div>
+              </div>
+              <div class="pm">
+                <div class="pm-val amber">4</div>
+                <div class="pm-lbl">Dashboard tabs (Overview · Visuals · Insights · Forecast)</div>
+              </div>
+              <div class="pm">
+                <div class="pm-val coral">CSV</div>
+                <div class="pm-lbl">Filtered data export for downstream use</div>
+              </div>
+              <div class="pm">
+                <div class="pm-val green">Live</div>
+                <div class="pm-lbl">Deployed on Streamlit Cloud</div>
+              </div>
+              <div class="pm">
+                <div class="pm-val accent">Top 5</div>
+                <div class="pm-lbl">Region &amp; product rankings auto-generated</div>
+              </div>
+            </div>
+
+            <div class="proj-tags">
+              <span class="tag">Python</span>
+              <span class="tag">Streamlit</span>
+              <span class="tag teal">Facebook Prophet</span>
+              <span class="tag teal">Plotly</span>
+              <span class="tag amber">Pandas</span>
+              <span class="tag amber">Matplotlib</span>
+              <span class="tag coral">Time Series</span>
+              <span class="tag">KPI Dashboards</span>
+              <span class="tag">Sales Forecasting</span>
+            </div>
+
+            <div class="proj-links">
+              <a href="https://github.com/Trupti-02/Sales_dashboard" target="_blank" class="proj-link gh">⌥ View on GitHub</a>
+              <a href="https://salesdashboard-pals9v9nnz9y5ptl9luj76.streamlit.app/" target="_blank" class="proj-link live">↗ Live App</a>
+            </div>
+          </div>
+
+          <div class="proj-panel">
+            <div>
+              <p class="panel-title">Dashboard tabs</p>
+              <ul class="feature-list">
+                <li><strong>Overview</strong> — Total sales, units sold, avg cost, top product &amp; region</li>
+                <li><strong>Visualizations</strong> — Sales by product, time series, monthly breakdowns, pie chart shares</li>
+                <li><strong>Top Insights</strong> — Top 5 regions &amp; products by revenue, price comparisons</li>
+                <li><strong>Data &amp; Export</strong> — Filtered records + CSV download</li>
+                <li><strong>Forecasting</strong> — Prophet model with trend + seasonality decomposition</li>
+              </ul>
+            </div>
+            <div>
+              <p class="panel-title">Forecasting features</p>
+              <ul class="feature-list">
+                <li>Adjustable forecast horizon: 1–12 months</li>
+                <li>Per-product-line granularity</li>
+                <li>Upper / lower confidence bands visualized</li>
+                <li>Seasonality breakdown (trend, weekly, yearly)</li>
+                <li>Territory &amp; region filter support</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /projects -->
+  </section>
+
+  <!-- Skills -->
+  <section id="skills">
+    <p class="eyebrow">Technical toolkit</p>
+    <h2 class="sec">Skills</h2>
+    <p class="sec-sub">Full-stack data skills from ingestion to insight delivery.</p>
+    <div class="skills-grid">
+      <div class="sk"><div class="sk-cat">Languages</div><h3>Programming</h3><div class="tags"><span class="stag">Python</span><span class="stag">SQL</span><span class="stag">R</span><span class="stag">Java</span><span class="stag">C/C++</span><span class="stag">JavaScript</span></div></div>
+      <div class="sk"><div class="sk-cat">ML &amp; Analysis</div><h3>Data science</h3><div class="tags"><span class="stag">Pandas</span><span class="stag">Scikit-learn</span><span class="stag">XGBoost</span><span class="stag">TensorFlow</span><span class="stag">PyTorch</span><span class="stag">Prophet</span><span class="stag">A/B Testing</span></div></div>
+      <div class="sk"><div class="sk-cat">Visualization</div><h3>BI &amp; dashboards</h3><div class="tags"><span class="stag">Power BI</span><span class="stag">Tableau</span><span class="stag">Streamlit</span><span class="stag">Plotly</span><span class="stag">DAX</span><span class="stag">Excel (Advanced)</span></div></div>
+      <div class="sk"><div class="sk-cat">Data Engineering</div><h3>Pipelines &amp; cloud</h3><div class="tags"><span class="stag">Databricks</span><span class="stag">Delta Lake</span><span class="stag">SSIS</span><span class="stag">AWS</span><span class="stag">Azure</span><span class="stag">Snowflake</span><span class="stag">Docker</span></div></div>
+      <div class="sk"><div class="sk-cat">Databases</div><h3>Storage</h3><div class="tags"><span class="stag">MySQL</span><span class="stag">PostgreSQL</span><span class="stag">MongoDB</span><span class="stag">NoSQL</span><span class="stag">Unity Catalog</span></div></div>
+      <div class="sk"><div class="sk-cat">Finance</div><h3>FP&amp;A</h3><div class="tags"><span class="stag">Budgeting</span><span class="stag">Forecasting</span><span class="stag">Variance analysis</span><span class="stag">MIS reporting</span><span class="stag">KPI tracking</span></div></div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <p class="eyebrow">Get in touch</p>
+    <h2 class="sec">Contact</h2>
+    <p class="sec-sub">Open to data analyst and data engineering roles. Let's talk.</p>
+    <div class="contact-row">
+      <a href="mailto:truptigangji@gmail.com" class="cc">
+        <div class="cc-icon">✉</div>
+        <div><div class="cc-label">Email</div><div class="cc-val">truptigangji@gmail.com</div></div>
+      </a>
+      <a href="https://www.linkedin.com/in/truptigangji" target="_blank" class="cc">
+        <div class="cc-icon">in</div>
+        <div><div class="cc-label">LinkedIn</div><div class="cc-val">linkedin.com/in/truptigangji</div></div>
+      </a>
+      <a href="https://github.com/Trupti-02" target="_blank" class="cc">
+        <div class="cc-icon">⌥</div>
+        <div><div class="cc-label">GitHub</div><div class="cc-val">github.com/Trupti-02</div></div>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <p>Updated June 2025 · Trupti Gangji · Built with HTML &amp; deployed on GitHub Pages</p>
+  </footer>
+
+</main>
+</div>
+
+<script>
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('nav a[href^="#"]');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navLinks.forEach(a => {
+          a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id);
+        });
+      }
+    });
+  }, { rootMargin: '-25% 0px -65% 0px' });
+  sections.forEach(s => obs.observe(s));
+</script>
 
 </body>
 </html>
